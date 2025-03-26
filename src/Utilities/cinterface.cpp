@@ -362,14 +362,50 @@ extern "C" int build_bicoloring_from_csc(void** ref, int* len1, int* len2, int* 
     return 1;
 }
 
-extern "C" void get_coloring(void* ref, int* coloring) {
+extern "C" void order_coloring(void* ref, int* ordering) {
+    GraphColoringInterface* g = static_cast<GraphColoringInterface*>(ref);
+    vector<int> _ordering;
+    g->GetOrderedVertices(_ordering);
+    memcpy(ordering, _ordering.data(), _ordering.size() * sizeof(int));
+}
+
+extern "C" void order_partial_coloring(void* ref, int* ordering) {
+    BipartiteGraphPartialColoringInterface* g = static_cast<BipartiteGraphPartialColoringInterface*>(ref);
+    vector<int> _ordering;
+    g->GetOrderedVertices(_ordering);
+    memcpy(ordering, _ordering.data(), _ordering.size() * sizeof(int));
+}
+
+extern "C" void order_bicoloring(void* ref, int* ordering) {
+    BipartiteGraphBicoloringInterface* g = static_cast<BipartiteGraphBicoloringInterface*>(ref);
+    vector<int> _ordering;
+    g->GetOrderedVertices(_ordering);
+    memcpy(ordering, _ordering.data(), _ordering.size() * sizeof(int));
+}
+
+extern "C" double timer_order_coloring(void* ref) {
+    GraphColoringInterface *g = (GraphColoringInterface*) ref;
+    return g->GetVertexOrderingTime();
+}
+
+extern "C" double timer_order_partial_coloring(void* ref) {
+    BipartiteGraphPartialColoringInterface *pg = (BipartiteGraphPartialColoringInterface*) ref;
+    return pg->GetVertexOrderingTime();
+}
+
+extern "C" double timer_order_bicoloring(void* ref) {
+    BipartiteGraphBicoloringInterface *bg = (BipartiteGraphBicoloringInterface*) ref;
+    return bg->GetVertexOrderingTime();
+}
+
+extern "C" void colors_coloring(void* ref, int* coloring) {
     GraphColoringInterface* g = static_cast<GraphColoringInterface*>(ref);
     vector<int> _coloring;
     g->GetVertexColors(_coloring);
     memcpy(coloring, _coloring.data(), _coloring.size() * sizeof(int));
 }
 
-extern "C" void get_partial_coloring(void* ref, int* coloring) {
+extern "C" void colors_partial_coloring(void* ref, int* coloring) {
     BipartiteGraphPartialColoringInterface* g = static_cast<BipartiteGraphPartialColoringInterface*>(ref);
     vector<int> _left_coloring;
     vector<int> _right_coloring;
@@ -384,7 +420,7 @@ extern "C" void get_partial_coloring(void* ref, int* coloring) {
     }
 }
 
-extern "C" void get_bicoloring(void* ref, int* left_coloring, int* right_coloring) {
+extern "C" void colors_bicoloring(void* ref, int* left_coloring, int* right_coloring) {
     BipartiteGraphBicoloringInterface* g = static_cast<BipartiteGraphBicoloringInterface*>(ref);
     vector<int> _left_coloring;
     vector<int> _right_coloring;
@@ -392,6 +428,21 @@ extern "C" void get_bicoloring(void* ref, int* left_coloring, int* right_colorin
     g->GetRightVertexColors(_right_coloring);
     memcpy(left_coloring, _left_coloring.data(), _left_coloring.size() * sizeof(int));
     memcpy(right_coloring, _right_coloring.data(), _right_coloring.size() * sizeof(int));
+}
+
+extern "C" double timer_colors_coloring(void* ref) {
+    GraphColoringInterface *g = (GraphColoringInterface*) ref;
+    return g->GetVertexColoringTime();
+}
+
+extern "C" double timer_colors_partial_coloring(void* ref) {
+    BipartiteGraphPartialColoringInterface *pg = (BipartiteGraphPartialColoringInterface*) ref;
+    return pg->GetVertexColoringTime();
+}
+
+extern "C" double timer_colors_bicoloring(void* ref) {
+    BipartiteGraphBicoloringInterface *bg = (BipartiteGraphBicoloringInterface*) ref;
+    return bg->GetVertexColoringTime();
 }
 
 extern "C" int ncolors_coloring(void* ref) {

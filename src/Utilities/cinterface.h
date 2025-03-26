@@ -41,9 +41,23 @@ extern "C" int build_bicoloring_from_csr(void** ref, int* len1, int* len2, int* 
 extern "C" int build_partial_coloring_from_csc(void** ref, int* len, int* rowval, int* colptr, int nrows, int ncols, const char* method, const char* order, int verbose);
 extern "C" int build_bicoloring_from_csc(void** ref, int* len1, int* len2, int* rowval, int* colptr, int nrows, int ncols, const char* method, const char* order, int verbose);
 
-extern "C" void get_coloring(void* ref, int* coloring);
-extern "C" void get_partial_coloring(void* ref, int* coloring);
-extern "C" void get_bicoloring(void* ref, int* left_coloring, int* right_coloring);
+// Recover the ordering of the vertices
+extern "C" void order_coloring(void* ref, int* ordering);
+extern "C" void order_partial_coloring(void* ref, int* ordering);
+extern "C" void order_bicoloring(void* ref, int* ordering);
+
+extern "C" double timer_order_coloring(void* ref);
+extern "C" double timer_order_partial_coloring(void* ref);
+extern "C" double timer_order_bicoloring(void* ref);
+
+// Recover the coloring of the vertices
+extern "C" void colors_coloring(void* ref, int* coloring);
+extern "C" void colors_partial_coloring(void* ref, int* coloring);
+extern "C" void colors_bicoloring(void* ref, int* left_coloring, int* right_coloring);
+
+extern "C" double timer_colors_coloring(void* ref);
+extern "C" double timer_colors_partial_coloring(void* ref);
+extern "C" double timer_colors_bicoloring(void* ref);
 
 extern "C" int ncolors_coloring(void* ref);
 extern "C" int ncolors_partial_coloring(void* ref);
