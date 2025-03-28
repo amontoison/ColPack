@@ -933,7 +933,7 @@ namespace ColPack
 			#pragma omp parallel default(none) firstprivate(i) shared(pii_ConflictColorCombination, i_ConflictVertex, cout, i_VertexCount, Colors2Edge_Private, PotentialHub_Private, i_MaxNumThreads, b_Stop, i_Mode)
 #endif
 			for(map< pair<int, int>, Colors2Edge_Value, lt_pii >::iterator iter = Colors2Edge_Private[i].begin(); iter != Colors2Edge_Private[i].end() ; iter++) {
-#ifdef _OPENMP	
+#ifdef _OPENMP
                                 #pragma omp single nowait
 #endif
 				{

@@ -150,4 +150,3 @@ namespace ColPack
 	};
 }
 #endif
-

@@ -558,10 +558,14 @@ namespace ColPack
 			return AcyclicColoring_ForIndirectRecovery(s_OrderingVariant);
 		} else if (s_ColoringVariant == "STAR") {
 			return StarColoring(s_OrderingVariant);
+		} else if (s_ColoringVariant == "NAIVE_STAR") {
+			return NaiveStarColoring(s_OrderingVariant);
 		} else if (s_ColoringVariant == "RESTRICTED_STAR") {
 			return RestrictedStarColoring(s_OrderingVariant);
 		} else if (s_ColoringVariant == "DISTANCE_TWO") {
 			return DistanceTwoColoring(s_OrderingVariant);
+		} else if (s_ColoringVariant == "TRIANGULAR") {
+			return TriangularColoring(s_OrderingVariant);
 		} else if (s_ColoringVariant == "DISTANCE_ONE_OMP") {
 			return DistanceOneColoring_OMP(s_OrderingVariant);
 		} else {

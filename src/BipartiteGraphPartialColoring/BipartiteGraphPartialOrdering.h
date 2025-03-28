@@ -67,8 +67,8 @@ namespace ColPack
 		int RowIncidenceDegreeOrdering();
 		int ColumnIncidenceDegreeOrdering();
 
-                int RowDynamicLargestFirstOrdering();
-                int ColumnDynamicLargestFirstOrdering();
+		int RowDynamicLargestFirstOrdering();
+		int ColumnDynamicLargestFirstOrdering();
 
 		string GetVertexOrderingVariant();
 

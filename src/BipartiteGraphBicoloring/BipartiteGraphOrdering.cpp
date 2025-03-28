@@ -974,7 +974,7 @@ namespace ColPack
 
 	int BipartiteGraphOrdering::SelectiveLargestFirstOrdering()
 	{
-		if(CheckVertexOrdering("SELECTVE_LARGEST_FIRST"))
+		if(CheckVertexOrdering("SELECTIVE_LARGEST_FIRST"))
 		{
 			return(_TRUE);
 		}
@@ -1631,12 +1631,12 @@ namespace ColPack
 			return("Incidence Degree");
 		}
 		else
-		if(m_s_VertexOrderingVariant.compare("SELECTVE_LARGEST_FIRST") == 0)
+		if(m_s_VertexOrderingVariant.compare("SELECTIVE_LARGEST_FIRST") == 0)
 		{
 			return("Selective Largest First");
 		}
 		else
-		if(m_s_VertexOrderingVariant.compare("SELECTVE_SMALLEST_FIRST") == 0)
+		if(m_s_VertexOrderingVariant.compare("SELECTIVE_SMALLEST_LAST") == 0)
 		{
 			return("Selective Smallest Last");
 		}
@@ -1687,6 +1687,21 @@ namespace ColPack
 		if((s_OrderingVariant.compare("INCIDENCE_DEGREE") == 0))
 		{
 			return(IncidenceDegreeOrdering());
+		}
+		else
+		if((s_OrderingVariant.compare("SELECTIVE_LARGEST_FIRST") == 0))
+		{
+			return(SelectiveLargestFirstOrdering());
+		}
+		else
+		if((s_OrderingVariant.compare("SELECTIVE_SMALLEST_LAST") == 0))
+		{
+			return(SelectiveSmallestLastOrdering());
+		}
+		else
+		if((s_OrderingVariant.compare("SELECTIVE_INCIDENCE_DEGREE") == 0))
+		{
+			return(SelectiveIncidenceDegreeOrdering());
 		}
 		else
 		if((s_OrderingVariant.compare("RANDOM") == 0))
