@@ -394,8 +394,8 @@ extern "C" void order_partial_coloring(void* ref, int* ordering) {
     vector<int> _left_coloring;
     g->GetOrderedVertices(_ordering);
     g->GetLeftVertexColors(_left_coloring);
-    nrows = g->m_i_LeftVertexColorCount;
-    ncols = g->m_i_RightVertexColorCount;
+    int nrows = g->m_i_LeftVertexColorCount;
+    int ncols = g->m_i_RightVertexColorCount;
 
     if (!_left_coloring.empty()) {
         memcpy(ordering, _ordering.data(), _ordering.size() * sizeof(int));
