@@ -1143,12 +1143,5 @@ namespace ColPack
 	void BipartiteGraphPartialColoring::SetVertexColoringVariant(string s_VertexColoringVariant) {
 	  m_s_VertexColoringVariant = s_VertexColoringVariant;
 	}
-
-	int BipartiteGraphPartialColoring::GetLeftVertexColorCount() {
-		return m_i_LeftVertexColorCount;
-	}
-
-	int BipartiteGraphPartialColoring::GetRightVertexColorCount() {
-		return m_i_RightVertexColorCount;
-	}
 }
+

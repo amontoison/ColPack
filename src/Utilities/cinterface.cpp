@@ -391,19 +391,8 @@ extern "C" void order_coloring(void* ref, int* ordering) {
 extern "C" void order_partial_coloring(void* ref, int* ordering) {
     BipartiteGraphPartialColoringInterface* g = static_cast<BipartiteGraphPartialColoringInterface*>(ref);
     vector<int> _ordering;
-    vector<int> _left_coloring;
-    int nrows;
     g->GetOrderedVertices(_ordering);
-    g->GetLeftVertexColors(_left_coloring);
-    nrows = g->GetLeftVertexColorCount();
-
-    if (!_left_coloring.empty()) {
-        memcpy(ordering, _ordering.data(), _ordering.size() * sizeof(int));
-    } else {
-        for (size_t i = 0; i < _ordering.size(); ++i) {
-            ordering[i] = _ordering[i] - nrows;
-        }
-    }
+    memcpy(ordering, _ordering.data(), _ordering.size() * sizeof(int));
 }
 
 extern "C" void order_bicoloring(void* ref, int* ordering) {

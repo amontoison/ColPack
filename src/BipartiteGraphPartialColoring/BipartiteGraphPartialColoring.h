@@ -195,10 +195,6 @@ namespace ColPack
 		double GetVertexColoringTime();
 
 		void SetVertexColoringVariant(string s_VertexColoringVariant);
-
-		int GetLeftVertexColorCount();
-
-		int GetRightVertexColorCount();
 	};
 }
 #endif
