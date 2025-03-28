@@ -131,7 +131,6 @@ namespace ColPack
 		void Seed_reset();
 
 	public:
-
 		//Public Constructor 2451
 		BipartiteGraphPartialColoring();
 
@@ -196,6 +195,10 @@ namespace ColPack
 		double GetVertexColoringTime();
 
 		void SetVertexColoringVariant(string s_VertexColoringVariant);
+
+		int GetLeftVertexColorCount();
+
+		int GetRightVertexColorCount();
 	};
 }
 #endif

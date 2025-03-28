@@ -146,7 +146,6 @@ namespace ColPack
 
 		//Public Function 2604
 		void Reset();
-
 	};
 }
 #endif
