@@ -24,8 +24,10 @@ const unordered_set<string> GENERAL_COLORING({
     "ACYCLIC",
     "ACYCLIC_FOR_INDIRECT_RECOVERY",
     "STAR",
+    "NAIVE_STAR",
     "RESTRICTED_STAR",
-    "DISTANCE_TWO"});
+    "DISTANCE_TWO",
+    "TRIANGULAR"});
 
 const unordered_set<string> PARTIAL_COLORING({
     "COLUMN_PARTIAL_DISTANCE_TWO",
@@ -480,28 +482,13 @@ extern "C" int ncolors_bicoloring(void* ref) {
 }
 
 extern "C" void free_coloring(void* ref) {
-    if (ref != nullptr) {
-        GraphColoringInterface *g = (GraphColoringInterface*) ref;
-        if (g != nullptr) {
-            delete g;
-        }
-    }
+    delete static_cast<GraphColoringInterface*>(ref);
 }
 
 extern "C" void free_partial_coloring(void* ref) {
-    if (ref != nullptr) {
-        BipartiteGraphPartialColoringInterface *pg = (BipartiteGraphPartialColoringInterface*) ref;
-        if (pg != nullptr) {
-            delete pg;
-        }
-    }
+    delete static_cast<BipartiteGraphPartialColoringInterface*>(ref);
 }
 
 extern "C" void free_bicoloring(void* ref) {
-    if (ref != nullptr) {
-        BipartiteGraphBicoloringInterface *bg = (BipartiteGraphBicoloringInterface*) ref;
-        if (bg != nullptr) {
-            delete bg;
-        }
-    }
+    delete static_cast<BipartiteGraphBicoloringInterface*>(ref);
 }
