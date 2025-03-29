@@ -89,16 +89,7 @@ libcolpack_a_SOURCES = \
 			../../../src/GeneralGraphColoring/GraphColoringInterface.cpp \
 			../../../src/GeneralGraphColoring/GraphInputOutput.cpp \
 			../../../src/GeneralGraphColoring/GraphOrdering.cpp \
-			../../../src/GeneralGraphColoring/GraphColoring.cpp
-
-if ENABLE_OPENMP
-libcolpack_a_SOURCES += ../../../src/SMPGC/SMPGCColoring.cpp \
-			../../../src/SMPGC/SMPGCColoringD1.cpp \
-			../../../src/SMPGC/SMPGCColoringD2.cpp \
-			../../../src/SMPGC/SMPGCColoringHybrid.cpp \
-			../../../src/SMPGC/SMPGC.cpp \
-			../../../src/SMPGC/SMPGCGraph.cpp \
-			../../../src/SMPGC/SMPGCOrdering.cpp \
+			../../../src/GeneralGraphColoring/GraphColoring.cpp \
 			../../../src/BipartiteGraphPartialColoring/BipartiteGraphPartialOrdering.cpp \
 			../../../src/BipartiteGraphPartialColoring/BipartiteGraphPartialColoring.cpp \
 			../../../src/BipartiteGraphPartialColoring/BipartiteGraphPartialColoringInterface.cpp \
@@ -112,6 +103,15 @@ libcolpack_a_SOURCES += ../../../src/SMPGC/SMPGCColoring.cpp \
 			../../../src/Recovery/RecoveryCore.cpp \
 			../../../src/Recovery/JacobianRecovery2D.cpp \
 			../../../src/Recovery/HessianRecovery.cpp
+
+if ENABLE_OPENMP
+libcolpack_a_SOURCES += ../../../src/SMPGC/SMPGCColoring.cpp \
+			../../../src/SMPGC/SMPGCColoringD1.cpp \
+			../../../src/SMPGC/SMPGCColoringD2.cpp \
+			../../../src/SMPGC/SMPGCColoringHybrid.cpp \
+			../../../src/SMPGC/SMPGC.cpp \
+			../../../src/SMPGC/SMPGCGraph.cpp \
+			../../../src/SMPGC/SMPGCOrdering.cpp
 endif
 
 #libcolpack_a_SOURCES += ../../../src/PartialD2SMPGC/PD2SMPGCColoring.cpp \
@@ -120,11 +120,9 @@ endif
 #			 ../../../src/PartialD2SMPGC/PD2SMPGCOrdering.cpp
 
 if EXAMPLES
-if ENABLE_OPENMP
 bin_PROGRAMS = ColPack
 ColPack_SOURCES = ../../../Examples/ColPackAll/Main.cpp
 ColPack_LDADD = libcolpack.a
-endif
 
 # examplesdir = ${prefix}/examples
 # basic_examplesdir = ${examplesdir}/Basic
