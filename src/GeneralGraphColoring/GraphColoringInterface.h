@@ -161,9 +161,16 @@ namespace ColPack
 
 		static void PrintVertexEdgeMap(vector<int> &vi_Vertices, vector<int> &vi_Edges , map< int, map< int, int> > &mimi2_VertexEdgeMap);
 
+		double TimerOrdering();
+
+		double TimerColoring();
 	private:
 
 		Timer m_T_Timer;
+
+		double timer_ordering;
+
+		double timer_coloring;
 	};
 }
 #endif

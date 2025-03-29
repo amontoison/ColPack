@@ -78,7 +78,8 @@ namespace ColPack
 
 		m_T_Timer.Stop();
 
-		m_d_OrderingTime = m_T_Timer.GetWallTime();
+		timer_ordering = m_T_Timer.GetWallTime();
+        m_d_OrderingTime = timer_ordering;
 		//PrintVertexOrdering();
 		//Pause();
 
@@ -111,7 +112,8 @@ namespace ColPack
 
 		m_T_Timer.Stop();
 
-		m_d_ColoringTime = m_T_Timer.GetWallTime();
+		timer_coloring = m_T_Timer.GetWallTime();
+		m_d_ColoringTime = timer_coloring;
 
 //*/
 		va_end(ap); //cleanup
@@ -155,7 +157,8 @@ namespace ColPack
 
 		m_T_Timer.Stop();
 
-		m_d_OrderingTime = m_T_Timer.GetWallTime();
+		timer_ordering = m_T_Timer.GetWallTime();
+        m_d_OrderingTime = timer_ordering;
 
 		if(i_OrderingStatus != _TRUE)
 		{
@@ -172,7 +175,8 @@ namespace ColPack
 
 		m_T_Timer.Stop();
 
-		m_d_ColoringTime = m_T_Timer.GetWallTime();
+		timer_coloring = m_T_Timer.GetWallTime();
+		m_d_ColoringTime = timer_coloring;
 
 		return(i_ColoringStatus);
 	}
@@ -186,7 +190,8 @@ namespace ColPack
 
 		m_T_Timer.Stop();
 
-		m_d_OrderingTime = m_T_Timer.GetWallTime();
+		timer_ordering = m_T_Timer.GetWallTime();
+        m_d_OrderingTime = timer_ordering;
 
 		if(i_OrderingStatus != _TRUE)
 		{
@@ -203,7 +208,8 @@ namespace ColPack
 
 		m_T_Timer.Stop();
 
-		m_d_ColoringTime = m_T_Timer.GetWallTime();
+		timer_coloring = m_T_Timer.GetWallTime();
+		m_d_ColoringTime = timer_coloring;
 
 		return(i_ColoringStatus);
 	}
@@ -217,7 +223,8 @@ namespace ColPack
 
 		m_T_Timer.Stop();
 
-		m_d_OrderingTime = m_T_Timer.GetWallTime();
+		timer_ordering = m_T_Timer.GetWallTime();
+        m_d_OrderingTime = timer_ordering;
 
 		if(i_OrderingStatus != _TRUE)
 		{
@@ -234,7 +241,8 @@ namespace ColPack
 
 		m_T_Timer.Stop();
 
-		m_d_ColoringTime = m_T_Timer.GetWallTime();
+		timer_coloring = m_T_Timer.GetWallTime();
+		m_d_ColoringTime = timer_coloring;
 
 		return(i_ColoringStatus);
 	}
@@ -248,7 +256,8 @@ namespace ColPack
 
 		m_T_Timer.Stop();
 
-		m_d_OrderingTime = m_T_Timer.GetWallTime();
+		timer_ordering = m_T_Timer.GetWallTime();
+        m_d_OrderingTime = timer_ordering;
 
 		if(i_OrderingStatus != _TRUE)
 		{
@@ -265,7 +274,8 @@ namespace ColPack
 
 		m_T_Timer.Stop();
 
-		m_d_ColoringTime = m_T_Timer.GetWallTime();
+		timer_coloring = m_T_Timer.GetWallTime();
+		m_d_ColoringTime = timer_coloring;
 
 		return(i_ColoringStatus);
 	}
@@ -279,7 +289,8 @@ namespace ColPack
 
 		m_T_Timer.Stop();
 
-		m_d_OrderingTime = m_T_Timer.GetWallTime();
+		timer_ordering = m_T_Timer.GetWallTime();
+        m_d_OrderingTime = timer_ordering;
 
 		if(i_OrderingVariant != _TRUE)
 		{
@@ -296,7 +307,8 @@ namespace ColPack
 
 		m_T_Timer.Stop();
 
-		m_d_ColoringTime = m_T_Timer.GetWallTime();
+		timer_coloring = m_T_Timer.GetWallTime();
+		m_d_ColoringTime = timer_coloring;
 
 		return(i_ColoringStatus);
 	}
@@ -310,7 +322,8 @@ namespace ColPack
 
 		m_T_Timer.Stop();
 
-		m_d_OrderingTime = m_T_Timer.GetWallTime();
+		timer_ordering = m_T_Timer.GetWallTime();
+        m_d_OrderingTime = timer_ordering;
 
 		if(i_OrderingStatus != _TRUE)
 		{
@@ -327,7 +340,8 @@ namespace ColPack
 
 		m_T_Timer.Stop();
 
-		m_d_ColoringTime = m_T_Timer.GetWallTime();
+		timer_coloring = m_T_Timer.GetWallTime();
+		m_d_ColoringTime = timer_coloring;
 
 		return(i_ColoringStatus);
 	}
@@ -341,7 +355,8 @@ namespace ColPack
 
 		m_T_Timer.Stop();
 
-		m_d_OrderingTime = m_T_Timer.GetWallTime();
+		timer_ordering = m_T_Timer.GetWallTime();
+        m_d_OrderingTime = timer_ordering;
 
 		if(i_OrderingStatus != _TRUE)
 		{
@@ -358,7 +373,8 @@ namespace ColPack
 
 		m_T_Timer.Stop();
 
-		m_d_ColoringTime = m_T_Timer.GetWallTime();
+		timer_coloring = m_T_Timer.GetWallTime();
+		m_d_ColoringTime = timer_coloring;
 
 		return(i_ColoringStatus);
 	}
@@ -372,7 +388,8 @@ namespace ColPack
 
 		m_T_Timer.Stop();
 
-		m_d_OrderingTime = m_T_Timer.GetWallTime();
+		timer_ordering = m_T_Timer.GetWallTime();
+        m_d_OrderingTime = timer_ordering;
 
 		if(i_OrderingStatus != _TRUE)
 		{
@@ -389,7 +406,8 @@ namespace ColPack
 
 		m_T_Timer.Stop();
 
-		m_d_ColoringTime = m_T_Timer.GetWallTime();
+		timer_coloring = m_T_Timer.GetWallTime();
+		m_d_ColoringTime = timer_coloring;
 
 		return(i_ColoringStatus);
 	}
@@ -403,7 +421,8 @@ namespace ColPack
 
 		m_T_Timer.Stop();
 
-		m_d_OrderingTime = m_T_Timer.GetWallTime();
+		timer_ordering = m_T_Timer.GetWallTime();
+        m_d_OrderingTime = timer_ordering;
 
 		if(i_OrderingStatus != _TRUE)
 		{
@@ -420,7 +439,8 @@ namespace ColPack
 
 		m_T_Timer.Stop();
 
-		m_d_ColoringTime = m_T_Timer.GetWallTime();
+		timer_coloring = m_T_Timer.GetWallTime();
+		m_d_ColoringTime = timer_coloring;
 
 		return(i_ColoringStatus);
 	}
@@ -577,5 +597,13 @@ namespace ColPack
 	}
 	int GraphColoringInterface::GetVertexColorCount(){
 		return GraphColoring::GetVertexColorCount();
+	}
+
+	double GraphColoringInterface::TimerOrdering() {
+	  return timer_ordering;
+	}
+
+	double GraphColoringInterface::TimerColoring() {
+	  return timer_coloring;
 	}
 }

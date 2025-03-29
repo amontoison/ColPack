@@ -4,6 +4,9 @@
     <https://github.com/CSCsw/ColPack>
 *******************************************************************************/
 
+#ifndef TIMER_H
+#define TIMER_H
+
 #include "Definitions.h"
 
 #ifdef SYSTEM_TIME
@@ -19,10 +22,6 @@
 #include <ctime>
 
 #endif
-
-
-#ifndef TIMER_H
-#define TIMER_H
 
 namespace ColPack
 {

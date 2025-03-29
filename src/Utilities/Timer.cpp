@@ -6,8 +6,6 @@
 
 //using namespace std;
 
-#include "Definitions.h"
-
 #include "Timer.h"
 
 namespace ColPack

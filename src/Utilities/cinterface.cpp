@@ -406,17 +406,17 @@ extern "C" void order_bicoloring(void* ref, int* ordering) {
 
 extern "C" double timer_order_coloring(void* ref) {
     GraphColoringInterface *g = (GraphColoringInterface*) ref;
-    return g->GetVertexOrderingTime();
+    return g->TimerOrdering();
 }
 
 extern "C" double timer_order_partial_coloring(void* ref) {
     BipartiteGraphPartialColoringInterface *pg = (BipartiteGraphPartialColoringInterface*) ref;
-    return pg->GetVertexOrderingTime();
+    return pg->TimerOrdering();
 }
 
 extern "C" double timer_order_bicoloring(void* ref) {
     BipartiteGraphBicoloringInterface *bg = (BipartiteGraphBicoloringInterface*) ref;
-    return bg->GetVertexOrderingTime();
+    return bg->TimerOrdering();
 }
 
 extern "C" void colors_coloring(void* ref, int* coloring) {
@@ -453,17 +453,17 @@ extern "C" void colors_bicoloring(void* ref, int* left_coloring, int* right_colo
 
 extern "C" double timer_colors_coloring(void* ref) {
     GraphColoringInterface *g = (GraphColoringInterface*) ref;
-    return g->GetVertexColoringTime();
+    return g->TimerColoring();
 }
 
 extern "C" double timer_colors_partial_coloring(void* ref) {
     BipartiteGraphPartialColoringInterface *pg = (BipartiteGraphPartialColoringInterface*) ref;
-    return pg->GetVertexColoringTime();
+    return pg->TimerColoring();
 }
 
 extern "C" double timer_colors_bicoloring(void* ref) {
     BipartiteGraphBicoloringInterface *bg = (BipartiteGraphBicoloringInterface*) ref;
-    return bg->GetVertexColoringTime();
+    return bg->TimerColoring();
 }
 
 extern "C" int ncolors_coloring(void* ref) {

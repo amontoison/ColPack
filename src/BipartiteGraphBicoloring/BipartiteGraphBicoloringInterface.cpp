@@ -71,7 +71,8 @@ namespace ColPack
 		m_T_Timer.Start();
 		int i_OrderingStatus = OrderVertices(s_OrderingVariant);
 		m_T_Timer.Stop();
-		m_d_OrderingTime = m_T_Timer.GetWallTime();
+		timer_ordering = m_T_Timer.GetWallTime();
+        m_d_OrderingTime = timer_ordering;
 
 		if(i_OrderingStatus != _TRUE)
 		{
@@ -97,12 +98,14 @@ namespace ColPack
 		} else {
 			cout<<" Unknown Bicoloring Method "<<s_BicoloringVariant<<". Please use a legal Method."<<endl;
 			m_T_Timer.Stop();
-			m_d_ColoringTime = m_T_Timer.GetWallTime();
+			timer_coloring = m_T_Timer.GetWallTime();
+			m_d_ColoringTime = timer_coloring;
 			return (_FALSE);
 		}
 
 		m_T_Timer.Stop();
-		m_d_ColoringTime = m_T_Timer.GetWallTime();
+		timer_coloring = m_T_Timer.GetWallTime();
+		m_d_ColoringTime = timer_coloring;
 		return(i_ColoringStatus);
 	}
 
@@ -184,7 +187,8 @@ namespace ColPack
 
 		m_T_Timer.Stop();
 
-		m_d_OrderingTime = m_T_Timer.GetWallTime();
+		timer_ordering = m_T_Timer.GetWallTime();
+        m_d_OrderingTime = timer_ordering;
 
 		if(i_OrderingStatus != _TRUE)
 		{
@@ -215,14 +219,16 @@ namespace ColPack
 		} else {
 			cout<<" Unknown Bicoloring Method "<<s_BicoloringVariant<<". Please use a legal Method."<<endl;
 			m_T_Timer.Stop();
-			m_d_ColoringTime = m_T_Timer.GetWallTime();
+			timer_coloring = m_T_Timer.GetWallTime();
+			m_d_ColoringTime = timer_coloring;
 			return;
 		}
 
 
 		m_T_Timer.Stop();
 
-		m_d_ColoringTime = m_T_Timer.GetWallTime();
+		timer_coloring = m_T_Timer.GetWallTime();
+		m_d_ColoringTime = timer_coloring;
 //*/
 
 		va_end(ap); //cleanup
@@ -239,5 +245,13 @@ namespace ColPack
 
 	void BipartiteGraphBicoloringInterface::GetOrderedVertices(vector<int> &output) {
 	  BipartiteGraphOrdering::GetOrderedVertices(output);
+	}
+
+	double BipartiteGraphBicoloringInterface::TimerOrdering() {
+	  return timer_ordering;
+	}
+
+	double BipartiteGraphBicoloringInterface::TimerColoring() {
+	  return timer_coloring;
 	}
 }
