@@ -1,9 +1,3 @@
-/*******************************************************************************
-    This file is part of ColPack, which is under its License protection.
-    You should have received a copy of the License. If not, see 
-    <https://github.com/CSCsw/ColPack>
-*******************************************************************************/
-
 #ifndef TIMER_H
 #define TIMER_H
 
@@ -12,9 +6,9 @@
 namespace ColPack
 {
     /** @ingroup group4
-     *  @brief Timer class for performance measurement using std::chrono.
+     *  @brief Timer class for performance measurements using std::chrono.
      *
-     *  This class provides a precise stopwatch based on std::chrono,
+     *  This class provides a precise timer based on std::chrono,
      *  suitable for benchmarking and low-latency measurements.
      */
     class Timer
@@ -25,14 +19,11 @@ namespace ColPack
         bool running;
 
       public:
-        Timer();
-
-        void Start();
-
-        void Stop();
-
-        double GetWallTime() const;
+        Timer();         // Constructor
+        void Start();    // Start the timer
+        void Stop();     // Stop the timer
+        double GetWallTime(); // Get elapsed time in seconds
     };
 }
 
-#endif
+#endif // TIMER_H

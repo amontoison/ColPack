@@ -4,48 +4,36 @@
     <https://github.com/CSCsw/ColPack>
 *******************************************************************************/
 
-//using namespace std;
-
 #include "Timer.h"
-
 #include <chrono>
 
 namespace ColPack
 {
-    class Timer
+    // Constructor
+    Timer::Timer() : running(false) {}
+
+    // Start the timer
+    void Timer::Start()
     {
-      private:
-        std::chrono::high_resolution_clock::time_point start_time;
-        std::chrono::high_resolution_clock::time_point end_time;
-        bool running;
+        start_time = std::chrono::high_resolution_clock::now();
+        running = true;
+    }
 
-      public:
-        // Constructor
-        Timer() : running(false) {}
+    // Stop the timer
+    void Timer::Stop()
+    {
+        end_time = std::chrono::high_resolution_clock::now();
+        running = false;
+    }
 
-        // Start the timer
-        void Start()
+    // Get elapsed wall time in seconds
+    double Timer::GetWallTime()
+    {
+        if (running)
         {
-            start_time = std::chrono::high_resolution_clock::now();
-            running = true;
+            auto now = std::chrono::high_resolution_clock::now();
+            return std::chrono::duration<double>(now - start_time).count();
         }
-
-        // Stop the timer
-        void Stop()
-        {
-            end_time = std::chrono::high_resolution_clock::now();
-            running = false;
-        }
-
-        // Get elapsed wall time in seconds
-        double GetWallTime()
-        {
-            if (running)
-            {
-                auto now = std::chrono::high_resolution_clock::now();
-                return std::chrono::duration<double>(now - start_time).count();
-            }
-            return std::chrono::duration<double>(end_time - start_time).count();
-        }
-    };
+        return std::chrono::duration<double>(end_time - start_time).count();
+    }
 }
