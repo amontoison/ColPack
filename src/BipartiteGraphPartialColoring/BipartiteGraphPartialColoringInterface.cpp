@@ -66,7 +66,8 @@ namespace ColPack
 		m_T_Timer.Start();
 		int i_OrderingStatus = OrderVertices(s_OrderingVariant, s_ColoringVariant);
 		m_T_Timer.Stop();
-		m_d_OrderingTime = m_T_Timer.GetWallTime();
+		timer_ordering = m_T_Timer.GetWallTime();
+        m_d_OrderingTime = timer_ordering;
 
 		if(i_OrderingStatus != _TRUE)
 		{
@@ -88,12 +89,14 @@ namespace ColPack
 		} else {
 			cout<<" Unknown Partial Distance Two Coloring Method "<<s_ColoringVariant<<". Please use a legal Method."<<endl;
 			m_T_Timer.Stop();
-			m_d_ColoringTime = m_T_Timer.GetWallTime();
+			timer_coloring = m_T_Timer.GetWallTime();
+			m_d_ColoringTime = timer_coloring;
 			return (_FALSE);
 		}
 
 		m_T_Timer.Stop();
-		m_d_ColoringTime = m_T_Timer.GetWallTime();
+		timer_coloring = m_T_Timer.GetWallTime();
+		m_d_ColoringTime = timer_coloring;
 		return(i_ColoringStatus);
 	}
 
@@ -129,6 +132,14 @@ namespace ColPack
 		  int* ip_ColumnIndex = va_arg(ap,int*);
 
 		  BuildBPGraphFromCSRFormat(ip_RowIndex, i_RowCount, i_ColumnCount, ip_ColumnIndex);
+		}
+		else if (i_type == SRC_MEM_CSC) {
+		  int* ip_RowIndex = va_arg(ap,int*);
+		  int i_RowCount = va_arg(ap,int);
+		  int i_ColumnCount = va_arg(ap,int);
+		  int* ip_ColumnIndex = va_arg(ap,int*);
+
+		  BuildBPGraphFromCSCFormat(ip_RowIndex, i_RowCount, i_ColumnCount, ip_ColumnIndex);
 		}
 		else if (i_type == SRC_FILE) {
 		  // get string s_InputFile, string s_fileFormat
@@ -169,7 +180,8 @@ namespace ColPack
 
 		m_T_Timer.Stop();
 
-		m_d_OrderingTime = m_T_Timer.GetWallTime();
+		timer_ordering = m_T_Timer.GetWallTime();
+        m_d_OrderingTime = timer_ordering;
 
 		if(i_OrderingStatus != _TRUE)
 		{
@@ -196,13 +208,15 @@ namespace ColPack
 		} else {
 			cout<<" Unknown Partial Distance Two Coloring Method "<<s_ColoringVariant<<". Please use a legal Method."<<endl;
 			m_T_Timer.Stop();
-			m_d_ColoringTime = m_T_Timer.GetWallTime();
+			timer_coloring = m_T_Timer.GetWallTime();
+			m_d_ColoringTime = timer_coloring;
 			return;
 		}
 
 		m_T_Timer.Stop();
 
-		m_d_ColoringTime = m_T_Timer.GetWallTime();
+		timer_coloring = m_T_Timer.GetWallTime();
+		m_d_ColoringTime = timer_coloring;
 //*/
 		va_end(ap); //cleanup
 		return;
@@ -215,5 +229,13 @@ namespace ColPack
 
 	double** BipartiteGraphPartialColoringInterface::GetSeedMatrix(int* ip1_SeedRowCount, int* ip1_SeedColumnCount) {
 	  return BipartiteGraphPartialColoring::GetSeedMatrix(ip1_SeedRowCount, ip1_SeedColumnCount);
+	}
+
+	double BipartiteGraphPartialColoringInterface::TimerOrdering() {
+	  return timer_ordering;
+	}
+
+	double BipartiteGraphPartialColoringInterface::TimerColoring() {
+	  return timer_coloring;
 	}
 }

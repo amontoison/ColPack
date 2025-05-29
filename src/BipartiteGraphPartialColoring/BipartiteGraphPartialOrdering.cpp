@@ -1815,6 +1815,16 @@ namespace ColPack
 			return("Column Natural");
 		}
 		else
+		if(m_s_VertexOrderingVariant.compare("ROW_RANDOM") == 0)
+		{
+			return("Row Random");
+		}
+		else
+		if(m_s_VertexOrderingVariant.compare("COLUMN_RANDOM") == 0)
+		{
+			return("Column Random");
+		}
+		else
 		if(m_s_VertexOrderingVariant.compare("ROW_LARGEST_FIRST") == 0)
 		{
 			return("Row Largest First");
@@ -1843,6 +1853,16 @@ namespace ColPack
 		if(m_s_VertexOrderingVariant.compare("COLUMN_INCIDENCE_DEGREE") == 0)
 		{
 			return("Column Incidence Degree");
+		}
+		else
+		if(m_s_VertexOrderingVariant.compare("COLUMN_DYNAMIC_LARGEST_FIRST") == 0)
+		{
+			return("Column Dynamic Largest First");
+		}
+		else
+		if(m_s_VertexOrderingVariant.compare("ROW_DYNAMIC_LARGEST_FIRST") == 0)
+		{
+			return("Row Dynamic Largest First");
 		}
 		else
 		{
@@ -1886,6 +1906,10 @@ namespace ColPack
 			{
 				return(RowRandomOrdering());
 			}
+			if((s_OrderingVariant.compare("DYNAMIC_LARGEST_FIRST") == 0))
+			{
+				return(RowDynamicLargestFirstOrdering());
+			}
 			else
 			{
 				cerr<<endl;
@@ -1919,6 +1943,10 @@ namespace ColPack
 			if((s_OrderingVariant.compare("RANDOM") == 0))
 			{
 				return(ColumnRandomOrdering());
+			}
+			if((s_OrderingVariant.compare("DYNAMIC_LARGEST_FIRST") == 0))
+			{
+				return(ColumnDynamicLargestFirstOrdering());
 			}
 			else
 			{

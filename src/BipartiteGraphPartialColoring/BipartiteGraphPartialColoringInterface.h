@@ -132,10 +132,17 @@ namespace ColPack
 		double** GetSeedMatrix(int* ip1_SeedRowCount, int* ip1_SeedColumnCount);
 
 		void GetOrderedVertices(vector<int> &output);
+
+		double TimerOrdering();
+
+		double TimerColoring();
 	private:
 
 		Timer m_T_Timer;
 
+		double timer_ordering;
+
+		double timer_coloring;
 	public:
 
 		//Public Destructor 2602
@@ -146,8 +153,6 @@ namespace ColPack
 
 		//Public Function 2604
 		void Reset();
-
 	};
 }
 #endif
-

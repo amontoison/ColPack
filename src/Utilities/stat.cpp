@@ -422,6 +422,7 @@ void toFileStatisticForGraph(string baseDir, string stat_output_suffix , map<str
   out_Graph_Stat.close();
 }
 
+#ifdef _OPENMP
 void toFileStatisticForBipartiteGraph(string baseDir, string stat_output_suffix, map<string, bool> stat_flags  )
 {
 	ofstream out_Graph_Stat;
@@ -475,6 +476,7 @@ void toFileStatisticForBipartiteGraph(string baseDir, string stat_output_suffix,
 
   out_Graph_Stat.close();
 }
+#endif
 
 void printListOfGraphs(vector <string>& listOfGraphs, int selected) {
 	for(int i=0; i<(int)listOfGraphs.size();i++) {
@@ -483,6 +485,7 @@ void printListOfGraphs(vector <string>& listOfGraphs, int selected) {
 	}
 }
 
+#ifdef _OPENMP
 void toFileBiC(string baseDir, string stat_output_suffix , vector<string> Orderings, vector<string> Colorings, map<string, bool> stat_flags )
 {
 	ofstream out_NumberOfColors, out_Time;
@@ -702,3 +705,4 @@ void toFileBiPC(string baseDir, string stat_output_suffix, vector<string> Orderi
   if(stat_flags["NumberOfColors"]) out_NumberOfColors.close();
   if(stat_flags["Time"]) out_Time.close();
 }
+#endif

@@ -6,7 +6,9 @@
 #ifndef SMPGCColoring_H
 #define SMPGCColoring_H
 #include <vector>
-#include <omp.h>
+#ifdef _OPENMP
+    #include <omp.h>
+#endif
 #include "ColPackHeaders.h" //#include "GraphOrdering.h"
 #include "SMPGCOrdering.h"
 

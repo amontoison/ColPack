@@ -1,12 +1,12 @@
 #include "ColPackHeaders.h"
 #include <cstring>
 #include <unordered_set>
+
 using namespace ColPack;
 void usage();
 void general_coloring(int argc, char* argv[]);
 void partial_coloring(int argc, char* argv[]);
 void bicoloring(int argc, char* argv[]);
-
 
 const unordered_set<string> GENERAL_COLORING({
         "DISTANCE_ONE", 
@@ -15,11 +15,13 @@ const unordered_set<string> GENERAL_COLORING({
         "STAR", 
         "RESTRICTED_STAR", 
         "DISTANCE_TWO"});
+
 const unordered_set<string> BICOLORING({
         "IMPLICIT_COVERING__STAR_BICOLORING",
         "EXPLICIT_COVERING__STAR_BICOLORING",
         "EXPLICIT_COVERING__MODIFIED_STAR_BICOLORING",
         "IMPLICIT_COVERING__GREEDY_STAR_BICOLORING"});
+
 const unordered_set<string> PARTIAL_COLORING({
         "COLUMN_PARTIAL_DISTANCE_TWO",
         "ROW_PARTIAL_DISTANCE_TWO"});
@@ -44,7 +46,6 @@ int main(int argc, char* argv[]) {
     }
     return 0;
 }
-
 
 
 void general_coloring(int argc, char* argv[]){
@@ -92,8 +93,8 @@ void general_coloring(int argc, char* argv[]){
                     double t1 = g->GetVertexOrderingTime();
                     double t2 = g->GetVertexColoringTime();
                     printf("order+color time = %f = %f+%f\n",t1+t2, t1,t2);
-                    printf("number of colors: ");
-                    printf("%d\n",g->GetVertexColorCount());
+                    printf("number of colors: %d\n", g->GetVertexColorCount());
+                    g->PrintVertexColors();
                 }
                 else {
                     printf("%d\n",g->GetVertexColorCount());
@@ -149,8 +150,12 @@ void partial_coloring(int argc, char* argv[]){
                     double t1 = g->GetVertexOrderingTime();
                     double t2 = g->GetVertexColoringTime();
                     printf("order+color time = %f = %f+%f\n",t1+t2, t1,t2);
-                    printf("number of colors: ");
-                    printf("%d\n",g->GetVertexColorCount());
+                    printf("number of colors: %d\n", g->GetVertexColorCount());
+                    if (m == "ROW_PARTIAL_DISTANCE_TWO") {
+                        g->PrintRowPartialColors();
+                    } else {
+                        g->PrintColumnPartialColors();
+                    }
                 }
                 else {
                     printf("%d\n",g->GetVertexColorCount());
@@ -161,8 +166,6 @@ void partial_coloring(int argc, char* argv[]){
     }
     return;
 }
- 
-
 
 void bicoloring(int argc, char* argv[]){
     vector<string> fnames;
@@ -209,8 +212,8 @@ void bicoloring(int argc, char* argv[]){
                     double t1 = g->GetVertexOrderingTime();
                     double t2 = g->GetVertexColoringTime();
                     printf("order+color time = %f = %f+%f\n",t1+t2, t1,t2);
-                    printf("number of colors: ");
-                    printf("%d\n",g->GetVertexColorCount());
+                    printf("number of colors: %d\n", g->GetVertexColorCount());
+                    g->PrintVertexBicolors();
                 }
                 else {
                     printf("%d\n",g->GetVertexColorCount());
@@ -222,7 +225,6 @@ void bicoloring(int argc, char* argv[]){
     return;
 }
  
-
 
 void usage(){
     fprintf(stderr, "\n"
@@ -240,17 +242,17 @@ void usage(){
             "       the following options shall be supported:\n"
             "\n"
             "       -f files    Indicates the graph file path name.\n"
-            "       -v          Indicates verbose flag will be truned on and there will display more rich infomration.\n" 
+            "       -v          Indicates verbose flag will be turned on and there will display more rich information.\n"
             "       -o orders   Indicates the orderings. Could be 'RANDOM','NATURAL','LARGEST_FIRST','SMALLEST_LAST','DYNAMIC_LARGEST_FIRST','INCIDENCE_DEGREE'... . There could be some specific ordering for specific methods\n"
-            "       -m methods  Indicates the methods. Could be 'DISTANCE_ONE','ACYCLIC','STAR','DISTNACE_TWO','ROW_PARTIAL_DISTANCE_TWO','D1_OMP_GMMP','PD2_OMP_GMMP',...\n"
+            "       -m methods  Indicates the methods. Could be 'DISTANCE_ONE','ACYCLIC','STAR','DISTANCE_TWO','ROW_PARTIAL_DISTANCE_TWO','D1_OMP_GMMP','PD2_OMP_GMMP',...\n"
             "       -nT         Indicates number of threads used of parallel graph coloring\n"
-            "       -side       Indiecate Row (L) or Column (R) side of coloring for parallel partial colroing.\n"
+            "       -side       Indicate Row (L) or Column (R) side of coloring for parallel partial coloring.\n"
             "\n"
             "DESCRIPTION\n"
-            "       if the method is one of 'DISTANCE_ONE','ACYCLIC','STAR','DISTANCE_TWO','ROW_PARTIAL_DISTANCE_TWO' The method belongs to gereral coloring on general graphs.\n" 
-            "       if the method is one of 'ROW_PARTIAL_DISTANCE_TWO','COLUMN_PARTIAL_DISTANCE_TWO' The method belongs to partial coloring on bipartite graphs.\n" 
-            "       if the method is one of 'IMPLICIT_COVERING__STAR_BICOLORING','EXPLICIT_COVERING__STAR_BICOLORING',EXPLICIT_COVERING__MODIFIED_STAR_BICOLORING','IMPLICIT_COVERING__GREEDY_STAR_BICOLORING'. The method belongs to bicoloring on bipartite graphs.\n" 
-            "       if the method is one of 'D1_OMP_GM3P, D1_OMP_GM3P_LF, D1_OMP_GMMP, D1_OMP_GMMP_LF,D1_OMP_SERIAL, D1_OMP_SERIAL_LF, D1_OMP_JP, D1_OMP_JP_LF ,D1_OMP_MTJP, D1_OMP_MTJP_LF, D1_OMP_HBJP_GM3P, D1_OMP_HBJP_GM3P_.., D1_OMP_HBJP_GMMP.., D1_OMP_HBJP_.... ,D1_OMP_HBMTP_GM3P, D1_OMP_HBMTJP_GM3P_.., D1_OMP_HBMTJP_GMMP.., D1_OMP_HBMTJP_.... ,D2_OMP_GM3P, D2_OMP_GM3P_LF ,D2_OMP_GMMP, D2_OMP_GMMP_LF ,D2_OMP_SERIAL, D2_OMP_SERIAL_LF' the method belongs to parallel general graph coloring\n"
+            "       If the method is one of 'DISTANCE_ONE','ACYCLIC','STAR','DISTANCE_TWO','ROW_PARTIAL_DISTANCE_TWO' the method belongs to general coloring on general graphs.\n"
+            "       If the method is one of 'ROW_PARTIAL_DISTANCE_TWO','COLUMN_PARTIAL_DISTANCE_TWO' the method belongs to partial coloring on bipartite graphs.\n"
+            "       If the method is one of 'IMPLICIT_COVERING__STAR_BICOLORING','EXPLICIT_COVERING__STAR_BICOLORING',EXPLICIT_COVERING__MODIFIED_STAR_BICOLORING','IMPLICIT_COVERING__GREEDY_STAR_BICOLORING' the method belongs to bicoloring on bipartite graphs.\n"
+            "       If the method is one of 'D1_OMP_GM3P, D1_OMP_GM3P_LF, D1_OMP_GMMP, D1_OMP_GMMP_LF,D1_OMP_SERIAL, D1_OMP_SERIAL_LF, D1_OMP_JP, D1_OMP_JP_LF ,D1_OMP_MTJP, D1_OMP_MTJP_LF, D1_OMP_HBJP_GM3P, D1_OMP_HBJP_GM3P_.., D1_OMP_HBJP_GMMP.., D1_OMP_HBJP_.... ,D1_OMP_HBMTP_GM3P, D1_OMP_HBMTJP_GM3P_.., D1_OMP_HBMTJP_GMMP.., D1_OMP_HBMTJP_.... ,D2_OMP_GM3P, D2_OMP_GM3P_LF ,D2_OMP_GMMP, D2_OMP_GMMP_LF ,D2_OMP_SERIAL, D2_OMP_SERIAL_LF' the method belongs to parallel general graph coloring\n"
             "\n"
             "EXAMPLE\n"
             "./ColPack -f ../Graphs/bcsstk01.mtx -o LARGEST_FIRST RANDOM -m DISTANCE_ONE -v\n"
@@ -260,5 +262,3 @@ void usage(){
             "\n"
            ); 
 }
-
-

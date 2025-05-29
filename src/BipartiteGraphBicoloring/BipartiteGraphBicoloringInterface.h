@@ -133,10 +133,17 @@ namespace ColPack
 		double** GetRightSeedMatrix(int* ip1_RightSeedRowCount, int* ip1_RightSeedColumnCount);
 
 		void GetOrderedVertices(vector<int> &output);
+
+		double TimerOrdering();
+
+		double TimerColoring();
 	private:
 
 		Timer m_T_Timer;
 
+		double timer_ordering;
+
+		double timer_coloring;
 	public:
 		//Public Destructor 3702
 		~BipartiteGraphBicoloringInterface();
