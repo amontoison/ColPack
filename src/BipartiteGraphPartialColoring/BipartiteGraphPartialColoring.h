@@ -131,7 +131,6 @@ namespace ColPack
 		void Seed_reset();
 
 	public:
-
 		//Public Constructor 2451
 		BipartiteGraphPartialColoring();
 

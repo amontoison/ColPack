@@ -38,6 +38,15 @@ namespace ColPack
 		*/
 		int BuildBPGraphFromCSRFormat(int* ip_RowIndex, int i_RowCount, int i_ColumnCount, int* ip_ColumnIndex);
 
+		/// Read the sparsity pattern of Jacobian matrix represented in zero-based indexing, 3-array variation CSC format and build a corresponding adjacency graph.
+		/**
+		Zero-based indexing, 3-array variation CSC format.
+
+		Return value:
+		- _TRUE upon successful
+		*/
+		int BuildBPGraphFromCSCFormat(int* ip_RowIndex, int i_RowCount, int i_ColumnCount, int* ip_ColumnIndex);
+
 		/// Read the sparsity pattern of Jacobian matrix represented in ADOLC format (Row Compressed format) and build a corresponding adjacency graph.
 		/** Equivalent to RowCompressedFormat2BipartiteGraph
 		Precondition:

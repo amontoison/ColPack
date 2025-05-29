@@ -71,7 +71,8 @@ namespace ColPack
 		m_T_Timer.Start();
 		int i_OrderingStatus = OrderVertices(s_OrderingVariant);
 		m_T_Timer.Stop();
-		m_d_OrderingTime = m_T_Timer.GetWallTime();
+		timer_ordering = m_T_Timer.GetWallTime();
+        m_d_OrderingTime = timer_ordering;
 
 		if(i_OrderingStatus != _TRUE)
 		{
@@ -97,12 +98,14 @@ namespace ColPack
 		} else {
 			cout<<" Unknown Bicoloring Method "<<s_BicoloringVariant<<". Please use a legal Method."<<endl;
 			m_T_Timer.Stop();
-			m_d_ColoringTime = m_T_Timer.GetWallTime();
+			timer_coloring = m_T_Timer.GetWallTime();
+			m_d_ColoringTime = timer_coloring;
 			return (_FALSE);
 		}
 
 		m_T_Timer.Stop();
-		m_d_ColoringTime = m_T_Timer.GetWallTime();
+		timer_coloring = m_T_Timer.GetWallTime();
+		m_d_ColoringTime = timer_coloring;
 		return(i_ColoringStatus);
 	}
 
@@ -125,11 +128,26 @@ namespace ColPack
 		  BuildBPGraphFromRowCompressedFormat(uip2_JacobianSparsityPattern, i_RowCount, i_ColumnCount);
 		}
 		else if (i_type == SRC_MEM_ADIC) {
-		  // !!! add interface function that takes input from ADIC
-		  cerr<<"ERR: GraphColoringInterface(): s_inputSource \"ADIC\" is not supported yet"<<endl;
+		  std::list<std::set<int> > *  lsi_SparsityPattern = va_arg(ap,std::list<std::set<int> > *);
+		  int i_ColumnCount = va_arg(ap,int);
 
-		  va_end(ap); /*cleanup*/
-		  return;
+		  BuildBPGraphFromADICFormat(lsi_SparsityPattern, i_ColumnCount);
+		}
+		else if (i_type == SRC_MEM_SSF || i_type == SRC_MEM_CSR) {
+		  int* ip_RowIndex = va_arg(ap,int*);
+		  int i_RowCount = va_arg(ap,int);
+		  int i_ColumnCount = va_arg(ap,int);
+		  int* ip_ColumnIndex = va_arg(ap,int*);
+
+		  BuildBPGraphFromCSRFormat(ip_RowIndex, i_RowCount, i_ColumnCount, ip_ColumnIndex);
+		}
+		else if (i_type == SRC_MEM_CSC) {
+		  int* ip_RowIndex = va_arg(ap,int*);
+		  int i_RowCount = va_arg(ap,int);
+		  int i_ColumnCount = va_arg(ap,int);
+		  int* ip_ColumnIndex = va_arg(ap,int*);
+
+		  BuildBPGraphFromCSCFormat(ip_RowIndex, i_RowCount, i_ColumnCount, ip_ColumnIndex);
 		}
 		else if (i_type == SRC_FILE) {
 		  // get string s_InputFile, string s_fileFormat
@@ -169,7 +187,8 @@ namespace ColPack
 
 		m_T_Timer.Stop();
 
-		m_d_OrderingTime = m_T_Timer.GetWallTime();
+		timer_ordering = m_T_Timer.GetWallTime();
+        m_d_OrderingTime = timer_ordering;
 
 		if(i_OrderingStatus != _TRUE)
 		{
@@ -200,14 +219,16 @@ namespace ColPack
 		} else {
 			cout<<" Unknown Bicoloring Method "<<s_BicoloringVariant<<". Please use a legal Method."<<endl;
 			m_T_Timer.Stop();
-			m_d_ColoringTime = m_T_Timer.GetWallTime();
+			timer_coloring = m_T_Timer.GetWallTime();
+			m_d_ColoringTime = timer_coloring;
 			return;
 		}
 
 
 		m_T_Timer.Stop();
 
-		m_d_ColoringTime = m_T_Timer.GetWallTime();
+		timer_coloring = m_T_Timer.GetWallTime();
+		m_d_ColoringTime = timer_coloring;
 //*/
 
 		va_end(ap); //cleanup
@@ -224,5 +245,13 @@ namespace ColPack
 
 	void BipartiteGraphBicoloringInterface::GetOrderedVertices(vector<int> &output) {
 	  BipartiteGraphOrdering::GetOrderedVertices(output);
+	}
+
+	double BipartiteGraphBicoloringInterface::TimerOrdering() {
+	  return timer_ordering;
+	}
+
+	double BipartiteGraphBicoloringInterface::TimerColoring() {
+	  return timer_coloring;
 	}
 }

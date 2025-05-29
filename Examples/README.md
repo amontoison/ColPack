@@ -34,7 +34,7 @@ OPTIONS
         the following options shall be supported:
         
         -f files    Indicates the graph file path name.
-        -v          Indicates verbose flag will be truned on and there will display more rich infomration. 
+        -v          Indicates verbose flag will be truned on and there will display more rich information.
         -o orders   Indicates the orderings. The following orders are supported:
                     RANDOM
                     NATURAL

@@ -36,7 +36,7 @@ AC_PROG_CXX
 AX_CXXFLAGS_WARN_ALL
 AC_CONFIG_FILES(Makefile)
 AM_PROG_AR
-LT_INIT
+LT_INIT([win32-dll])
 
 AC_MSG_CHECKING(Build examples)
 AC_ARG_ENABLE([examples],
@@ -77,8 +77,5 @@ Configuration:
 
   Use OpenMP:                       ${openmp}
   Build examples:                   ${examples}
-
-  cx
-  top_srcdir                        ${top_srcdir}
 -----------------------------------------------------------------------------   
 "

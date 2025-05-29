@@ -165,7 +165,7 @@ namespace ColPack
 		  cout<<m_s_InputFile<<" not Found!"<<endl;
 		  exit(1);
 		}
-		else cout<<"Found file "<<m_s_InputFile<<endl;
+		// else cout<<"Found file "<<m_s_InputFile<<endl;
 
 		if (mm_read_banner(f, &matcode) != 0)
 		{
@@ -179,9 +179,9 @@ namespace ColPack
 		else b_symmetric = false;
 
 		//Check and make sure that the input file is supported
-		char * result = mm_typecode_to_str(matcode);
-		printf("Graph of Market Market type: [%s]\n", result);
-		free(result);
+		// char * result = mm_typecode_to_str(matcode);
+		// printf("Graph of Market Market type: [%s]\n", result);
+		// free(result);
 		if( !( 
                             mm_is_coordinate(matcode) && 
                             (mm_is_symmetric(matcode) || mm_is_general(matcode) ) && 
@@ -914,52 +914,73 @@ namespace ColPack
 	}
 
 	int BipartiteGraphInputOutput::BuildBPGraphFromCSRFormat(int* ip_RowIndex, int i_RowCount, int i_ColumnCount, int* ip_ColumnIndex) {
-	  int i;
-	  unsigned int j;
-	  map< int,vector<int> > colList;
+	    std::map<int, std::vector<int>> colList;
 
-	  m_vi_LeftVertices.clear();
-	  m_vi_LeftVertices.reserve(i_RowCount+1);
-	  m_vi_RightVertices.clear();
-	  m_vi_RightVertices.reserve(i_RowCount+1);
-	  m_vi_Edges.clear();
-	  m_vi_Edges.reserve(2*ip_RowIndex[i_RowCount]); //??? !!!
+	    m_vi_LeftVertices.clear();
+	    m_vi_LeftVertices.reserve(i_RowCount + 1);
+	    m_vi_RightVertices.clear();
+	    m_vi_RightVertices.reserve(i_ColumnCount + 1);
+	    m_vi_Edges.clear();
+	    m_vi_Edges.reserve(2 * ip_RowIndex[i_RowCount]);
 
-	  m_vi_LeftVertices.push_back(0); //equivalent to m_vi_LeftVertices.push_back(m_vi_Edges.size());
-	  //PrintBipartiteGraph ();
-	  //Pause();
-	  for(i=0; i < i_RowCount; i++) {
-	    for(j=ip_RowIndex[i]; j<(size_t)ip_RowIndex[i+1]; j++) {
-	      m_vi_Edges.push_back(ip_ColumnIndex[j]);
-	      colList[ ip_ColumnIndex[j] ].push_back(i);
+	    m_vi_LeftVertices.emplace_back(0);
+
+	    for (int i = 0; i < i_RowCount; ++i) {
+	        for (unsigned int j = static_cast<unsigned int>(ip_RowIndex[i]); j < static_cast<unsigned int>(ip_RowIndex[i + 1]); ++j) {
+	            m_vi_Edges.emplace_back(ip_ColumnIndex[j]);
+	            colList[ip_ColumnIndex[j]].emplace_back(i);
+	        }
+	        m_vi_LeftVertices.emplace_back(static_cast<int>(m_vi_Edges.size()));
 	    }
-	    m_vi_LeftVertices.push_back(m_vi_Edges.size());
-	    //PrintBipartiteGraph ();
-	    //Pause();
-	  }
 
-	  //for(i=0; i < i_RowCount; i++) {
-	//	  for(j=1; j <= uip2_JacobianSparsityPattern[i][0]; j++) {
-	//		  m_vi_Edges.push_back(uip2_JacobianSparsityPattern[i][j]);
-	//		  colList[ uip2_JacobianSparsityPattern[i][j] ].push_back(i);
-	//	  }
-	//	  m_vi_LeftVertices.push_back(m_vi_Edges.size());
-	  //}
+	    m_vi_RightVertices.emplace_back(static_cast<int>(m_vi_Edges.size()));
 
-	  //put together the right vertices
-	  map< int,vector<int> >::iterator curr;
-	  m_vi_RightVertices.push_back(m_vi_Edges.size());
-	  for(int i=0; i <= i_ColumnCount; i++) {
-		  curr = colList.find(i);
-		  if(curr !=colList.end()) {
-			m_vi_Edges.insert(m_vi_Edges.end(),curr->second.begin(),curr->second.end());
-		  }//else  We have an empty column
-		  m_vi_RightVertices.push_back(m_vi_Edges.size());
-	  }
+	    for (int i = 0; i < i_ColumnCount; ++i) {
+	        auto curr = colList.find(i);
+	        if (curr != colList.end()) {
+	            m_vi_Edges.insert(m_vi_Edges.end(), curr->second.begin(), curr->second.end());
+	        }
+	        m_vi_RightVertices.emplace_back(static_cast<int>(m_vi_Edges.size()));
+	    }
 
-	  CalculateVertexDegrees();
+	    CalculateVertexDegrees();
 
-	  return (_TRUE);
+	    return (_TRUE);
+	}
+
+	int BipartiteGraphInputOutput::BuildBPGraphFromCSCFormat(int* ip_RowIndex, int i_RowCount, int i_ColumnCount, int* ip_ColumnIndex) {
+	    std::map<int, std::vector<int>> rowList;
+
+	    m_vi_LeftVertices.clear();
+	    m_vi_LeftVertices.reserve(i_RowCount + 1);
+	    m_vi_RightVertices.clear();
+	    m_vi_RightVertices.reserve(i_ColumnCount + 1);
+	    m_vi_Edges.clear();
+	    m_vi_Edges.reserve(2 * ip_ColumnIndex[i_ColumnCount]);
+
+	    m_vi_RightVertices.emplace_back(0);
+
+	    for (int i = 0; i < i_ColumnCount; ++i) {
+	        for (unsigned int j = static_cast<unsigned int>(ip_ColumnIndex[i]); j < static_cast<unsigned int>(ip_ColumnIndex[i + 1]); ++j) {
+	            m_vi_Edges.emplace_back(ip_RowIndex[j]);
+	            rowList[ip_RowIndex[j]].emplace_back(i);
+	        }
+	        m_vi_RightVertices.emplace_back(static_cast<int>(m_vi_Edges.size()));
+	    }
+
+	    m_vi_LeftVertices.emplace_back(static_cast<int>(m_vi_Edges.size()));
+
+	    for (int i = 0; i < i_RowCount; ++i) {
+	        auto curr = rowList.find(i);
+	        if (curr != rowList.end()) {
+	            m_vi_Edges.insert(m_vi_Edges.end(), curr->second.begin(), curr->second.end());
+	        }
+	        m_vi_LeftVertices.emplace_back(static_cast<int>(m_vi_Edges.size()));
+	    }
+
+	    CalculateVertexDegrees();
+
+	    return (_TRUE);
 	}
 
 	int BipartiteGraphInputOutput::BuildBPGraphFromADICFormat(std::list<std::set<int> > *  lsi_SparsityPattern, int i_ColumnCount) {

@@ -366,7 +366,7 @@ vector<string> getListOfColors(string s_InputFile) {
   return ListOfColors;
 }
 
-
+#ifdef _OPENMP
 int buildDotWithoutColor(ColPack::BipartiteGraphPartialColoringInterface &g, vector<string> &ListOfColors, string fileName) {
   cerr<<"IN buildDotWithoutColor - BipartiteGraphPartialColoring"<<endl;
   ofstream OutputStream (fileName.c_str());
@@ -538,6 +538,7 @@ int buildDotWithColor(ColPack::BipartiteGraphPartialColoringInterface &g, vector
   cout<<"\t File created"<<endl;
   return 0;
 }
+#endif
 
 int buildDotWithoutColor(ColPack::BipartiteGraphBicoloringInterface &g, vector<string> &ListOfColors, string fileName) {
   cerr<<"Function to be built! int buildDotWithoutColor(ColPack::BipartiteGraphBicoloringInterface &g, vector<string> &ListOfColors, string fileName)"<<endl;

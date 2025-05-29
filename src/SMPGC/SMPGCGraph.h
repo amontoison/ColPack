@@ -9,7 +9,9 @@
 #include <vector>
 #include <unordered_map>
 #include <iostream>
-#include <omp.h>
+#ifdef _OPENMP
+    #include <omp.h>
+#endif
 #include "ColPackHeaders.h" //#include "GraphOrdering.h"
 
 using namespace std;
